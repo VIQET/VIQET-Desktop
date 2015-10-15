@@ -1,0 +1,12 @@
+rm(list=ls(all=TRUE))
+library("kernlab")
+
+uniqueNo = commandArgs(TRUE)
+inputFeaturesFile = paste( uniqueNo[1] , uniqueNo[2], "photoFeatures.txt", sep = "")
+outputLabelsFile  = paste( uniqueNo[1] , uniqueNo[2], "mos.txt", sep = "")
+
+load("SVM_LANDSCAPE_VANILLADOT_MODEL.RData")
+photoFeatures = as.matrix(read.table(inputFeaturesFile))
+
+predicted_score=predict(svm_model,photoFeatures)
+write.table(predicted_score,file=outputLabelsFile,row.names=FALSE,col.names=FALSE)

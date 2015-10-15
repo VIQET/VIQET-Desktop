@@ -1,0 +1,409 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3F198F67-25D4-42B5-9380-5588089897F5}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ViqetDesktop</RootNamespace>
+    <AssemblyName>ViqetDesktop</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Win32Resource>
+    </Win32Resource>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Accessibility" />
+    <Reference Include="MigraDoc.DocumentObjectModel-WPF">
+      <HintPath>..\ThirdPartyItems\PdfSharp\MigraDoc.DocumentObjectModel-WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.Rendering-WPF">
+      <HintPath>..\ThirdPartyItems\PdfSharp\MigraDoc.Rendering-WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.RtfRendering-WPF">
+      <HintPath>..\ThirdPartyItems\PdfSharp\MigraDoc.RtfRendering-WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp-WPF">
+      <HintPath>..\ThirdPartyItems\PdfSharp\PdfSharp-WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.Charting-WPF">
+      <HintPath>..\ThirdPartyItems\PdfSharp\PdfSharp.Charting-WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationUI, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="ReachFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Printing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="VQHelper, Version=0.0.0.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdPartyItems\VQdlls\VQHelper.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="HelperClasses\Category.cs" />
+    <Compile Include="HelperClasses\CommonTasks.cs" />
+    <Compile Include="HelperClasses\Constants.cs" />
+    <Compile Include="HelperClasses\CsvWriter.cs" />
+    <Compile Include="HelperClasses\ExamplePhoto.cs" />
+    <Compile Include="HelperClasses\ExifInspector.cs" />
+    <Compile Include="HelperClasses\InputCategoryInfo.cs" />
+    <Compile Include="HelperClasses\Methodology.cs" />
+    <Compile Include="HelperClasses\MethodologyProvider.cs" />
+    <Compile Include="HelperClasses\OutputCategoryInfo.cs" />
+    <Compile Include="HelperClasses\PdfWriter.cs" />
+    <Compile Include="HelperClasses\Photo.cs" />
+    <Compile Include="HelperClasses\PhotoInspector.cs" />
+    <Compile Include="HelperClasses\Result.cs" />
+    <Page Include="MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Common\About.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\Common\Header.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Common\Help.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Common\Instructions.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\Common\ProgressRing.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Common\Setting.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\ResultDetailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ResultPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ResultsBrowser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SelectPhotosPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Styles\Background.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Styles\Button.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Styles\Shapes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\Styles\Text.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="HelperClasses\ResultsExporter.cs" />
+    <Compile Include="HelperClasses\ResultStore.cs" />
+    <Compile Include="HelperClasses\XMLFileWriter.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Common\About.xaml.cs">
+      <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Common\Header.xaml.cs">
+      <DependentUpon>Header.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Common\Help.xaml.cs">
+      <DependentUpon>Help.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Common\Instructions.xaml.cs">
+      <DependentUpon>Instructions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Common\ProgressRing.xaml.cs">
+      <DependentUpon>ProgressRing.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Common\Setting.xaml.cs">
+      <DependentUpon>Setting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ResultDetailPage.xaml.cs">
+      <DependentUpon>ResultDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ResultPage.xaml.cs">
+      <DependentUpon>ResultPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ResultsBrowser.xaml.cs">
+      <DependentUpon>ResultsBrowser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SelectPhotosPage.xaml.cs">
+      <DependentUpon>SelectPhotosPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Properties\Resources.zh-CN.Designer.cs">
+      <DependentUpon>Resources.zh-CN.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <SubType>Designer</SubType>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.zh-CN.resx">
+      <SubType>Designer</SubType>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.zh-CN.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Resource Include="Assets\Buttons\Help.png" />
+    <Resource Include="Assets\Buttons\Home1.png" />
+    <Content Include="Assets\VIQET_Manual.xps">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Properties\Resources.Designer.cs_" />
+    <None Include="Properties\Settings.Designer.cs_" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <None Include="ViqetDesktop.licenseheader" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Buttons\NewTest.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Buttons\About.png" />
+    <Resource Include="Assets\Buttons\DeleteSelected.png" />
+    <Resource Include="Assets\Buttons\OpenSelected.png" />
+    <Resource Include="Assets\Buttons\Settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Buttons\Back.png" />
+    <Resource Include="Assets\Buttons\Finished.png" />
+    <Resource Include="Assets\Buttons\SubmitScore.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Buttons\Previous.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Icons\Star0.0.png" />
+    <Resource Include="Assets\Icons\Star0.1.png" />
+    <Resource Include="Assets\Icons\Star0.2.png" />
+    <Resource Include="Assets\Icons\Star0.3.png" />
+    <Resource Include="Assets\Icons\Star0.4.png" />
+    <Resource Include="Assets\Icons\Star0.5.png" />
+    <Resource Include="Assets\Icons\Star0.6.png" />
+    <Resource Include="Assets\Icons\Star0.7.png" />
+    <Resource Include="Assets\Icons\Star0.8.png" />
+    <Resource Include="Assets\Icons\Star0.9.png" />
+    <Resource Include="Assets\Icons\Star1.0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Buttons\Analyze.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Buttons\Import.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Buttons\Stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Buttons\Collapse.png" />
+    <Resource Include="Assets\Buttons\Expand.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Buttons\Next.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Buttons\DetailedResults.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Buttons\Export.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icon.ico" />
+    <Resource Include="Icon.png" />
+    <Resource Include="Assets\Buttons\GreenBackground.png" />
+    <Resource Include="Assets\Icons\add_photo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Buttons\Edit.png" />
+    <Resource Include="Assets\Buttons\Open.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Icons\HelpIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\SampleImages\OutdoorDayLandscape\Example1.jpg" />
+    <Resource Include="Assets\SampleImages\OutdoorDayLandscape\Example2.jpg" />
+    <Resource Include="Assets\SampleImages\OutdoorDayLandscape\Example3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\SampleImages\IndoorArrangements\Example1.jpg" />
+    <Resource Include="Assets\SampleImages\IndoorArrangements\Example2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\SampleImages\IndoorWallHanging\Example1.jpg" />
+    <Resource Include="Assets\SampleImages\IndoorWallHanging\Example2.jpg" />
+    <Resource Include="Assets\SampleImages\IndoorWallHanging\Example3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\SampleImages\OutdoorNightLandmark\Example1.jpg" />
+    <Resource Include="Assets\SampleImages\OutdoorNightLandmark\Example2.jpg" />
+    <Resource Include="Assets\SampleImages\OutdoorNightLandmark\Example3.jpg" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>XCOPY /C/Y $(SolutionDir)ThirdPartyItems\OpenCVdlls $(TargetDir)
+XCOPY /C/Y/E $(SolutionDir)ThirdPartyItems\VQdlls $(TargetDir)
+XCOPY /C/Y/E/I $(SolutionDir)ThirdPartyItems\Methodology $(TargetDir)Methodology
+</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

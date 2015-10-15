@@ -1,0 +1,94 @@
+﻿<!--
+Copyright © 2015 Intel Corporation
+This program and the accompanying materials are made available under the terms of the Eclipse Public License v1.0, 
+ which accompanies this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html . https://github.com/viqet
+ Contributors:
+    Intel Corporation - initial API and implementation and/or initial documentation
+-->
+<UserControl x:Class="ViqetDesktop.Setting"
+      xmlns:Common="clr-namespace:ViqetDesktop"
+      xmlns:properties="clr-namespace:ViqetDesktop.Properties"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="900" d:DesignWidth="1600">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Pages/Styles/Background.xaml"/>
+                <ResourceDictionary Source="/Pages/Styles/Button.xaml"/>
+                <ResourceDictionary Source="/Pages/Styles/Text.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+
+    <Grid Name="SettingsBackOverlay" Style="{StaticResource OverlayGridStyle}">
+
+        <Grid Style="{StaticResource MainGridStyle}" VerticalAlignment="Center" HorizontalAlignment="Center">
+
+            <Grid >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="70"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="110"/>
+                    <ColumnDefinition Width="300"/>
+                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition Width="110"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Row="0" Background="Black" Grid.ColumnSpan="4" >
+                <TextBlock Grid.Row="0" Text="Settings" Style="{StaticResource TextStyle}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+                
+                <Button  Width="30" Height="30"
+                            VerticalAlignment="Top" HorizontalAlignment="Right"
+                            Style="{StaticResource ButtonStyle}" 
+                            Content="X" 
+                            Background="#FFC96F67" 
+                            Click="CancelButton_Click">
+                </Button>
+                </Grid>
+                <Grid Grid.Column="1" Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="110"/>
+                        <ColumnDefinition Width="110"/>
+                        <ColumnDefinition Width="90"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Grid.Column="1" Width="100" Height="30"
+                        VerticalAlignment="Center" HorizontalAlignment="Center"
+                            Content="{x:Static properties:Resources.SaveSettings}" Foreground="White"
+                            Click="OKButton_Click">
+                        <Button.Background>
+                            <ImageBrush ImageSource="/Assets/Buttons/GreenBackground.png"/>
+                        </Button.Background>
+                    </Button>
+
+                </Grid>
+
+                <TextBlock Grid.Row="1" Grid.Column="1" 
+                       Text="{x:Static properties:Resources.EnforceMethodology}" 
+                       Style="{StaticResource DialogTextStyle}" 
+                       HorizontalAlignment="Left" VerticalAlignment="Center" TextAlignment="Left"/>
+
+                <CheckBox Name="CheckPhotoCount" Grid.Row="1" Grid.Column="2"
+                      HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                <TextBlock Grid.Row="2" Grid.Column="1" Text="{x:Static properties:Resources.DisplayPhotoMOS}" 
+                       Style="{StaticResource DialogTextStyle}" 
+                       HorizontalAlignment="Left" VerticalAlignment="Center" TextAlignment="Left"/>
+
+                <CheckBox Name="DisplayPhotoMOS" Grid.Row="2" Grid.Column="2"
+                      HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

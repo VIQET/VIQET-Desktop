@@ -1,0 +1,15 @@
+# install.packages("kernlab")
+
+rm(list=ls(all=TRUE))
+library("kernlab")
+
+uniqueNo = commandArgs(TRUE)
+inputFeaturesFile = paste( uniqueNo[1] , uniqueNo[2], "features_test.txt", sep = "")
+outputLabelsFile  = paste( uniqueNo[1] , uniqueNo[2], "predicted_labels.txt", sep = "")
+
+features_test = as.matrix(read.table(inputFeaturesFile))
+load("FlatRegionClassificationSVM.RData")
+
+predicted_labels=predict(svm_model, features_test, type="probabilities")
+write.table(predicted_labels, file=outputLabelsFile, row.names=FALSE, col.names=FALSE)
+

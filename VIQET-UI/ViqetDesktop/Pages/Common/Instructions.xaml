@@ -1,0 +1,111 @@
+﻿<!--
+Copyright © 2015 Intel Corporation
+This program and the accompanying materials are made available under the terms of the Eclipse Public License v1.0, 
+ which accompanies this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html . https://github.com/viqet
+ Contributors:
+    Intel Corporation - initial API and implementation and/or initial documentation
+-->
+<UserControl x:Class="ViqetDesktop.Instructions"
+      xmlns:Common="clr-namespace:ViqetDesktop"
+      xmlns:properties="clr-namespace:ViqetDesktop.Properties"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="900" d:DesignWidth="1600">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Pages/Styles/Background.xaml"/>
+                <ResourceDictionary Source="/Pages/Styles/Button.xaml"/>
+                <ResourceDictionary Source="/Pages/Styles/Text.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid Name="InstructionsBackOverlay" Style="{StaticResource OverlayGridStyle}">
+
+        <Grid Style="{StaticResource MainGridStyle}" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="500"/>
+                <RowDefinition Height="20"/>
+            </Grid.RowDefinitions>
+            
+            <Grid Grid.Row="0" Background="Black" Grid.ColumnSpan="4" >
+                <TextBlock Text="Instructions" Style="{StaticResource TextStyle}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+
+                <Button  Width="30" Height="30"
+                            VerticalAlignment="Top" HorizontalAlignment="Right"
+                            Style="{StaticResource ButtonStyle}" 
+                            Content="X" 
+                            Background="#FFC96F67" 
+                            Click="OKButton_Click">
+                </Button>
+            </Grid>
+            <ScrollViewer Name="Scroll" Grid.Row="1" MaxWidth="700" MaxHeight="500" VerticalScrollBarVisibility="Auto" >
+                <Grid Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid Name="CategoryInfoGrid" Grid.Row="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="150"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Text="{Binding Name}" Style="{StaticResource HeaderTextStyle}"/>
+                        <TextBlock Grid.Row="1" Text="{Binding Description}" Style="{StaticResource ContentTextStyle}" TextAlignment="Left" TextWrapping="Wrap"/>
+                        <ListView Grid.Row="2" IsHitTestVisible="False"
+                              Height="150"
+                              ItemsSource="{Binding ExamplePhotoList}" 
+                              ScrollViewer.VerticalScrollBarVisibility="Disabled" 
+                              ScrollViewer.CanContentScroll="False"
+                              Background="{x:Null}" 
+                              BorderBrush="{x:Null}">
+                            <ListView.GroupStyle>
+                                <GroupStyle>
+                                    <GroupStyle.Panel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Horizontal" />
+                                        </ItemsPanelTemplate>
+                                    </GroupStyle.Panel>
+                                </GroupStyle>
+                            </ListView.GroupStyle>
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Width="Auto">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                            <RowDefinition Height="20"/>
+                                        </Grid.RowDefinitions>
+                                        <Image Grid.Row="0" Source="{Binding Thumbnail}" Stretch="Uniform"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </Grid>
+
+                    <Grid Name="GeneralInfoGrid" Grid.Row="2" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Text="{x:Static properties:Resources.GeneralGuidelines}" Style="{StaticResource HeaderTextStyle}"/>
+                        <TextBlock Grid.Row="1" Text="{Binding GeneralInstructions}" Style="{StaticResource ContentTextStyle}" TextAlignment="Left" TextWrapping="Wrap"/>
+                    </Grid>
+                </Grid>
+            </ScrollViewer>
+        </Grid>
+
+    </Grid>
+</UserControl>

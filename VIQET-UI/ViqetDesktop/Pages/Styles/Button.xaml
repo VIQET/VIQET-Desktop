@@ -1,0 +1,121 @@
+﻿<!--
+Copyright © 2015 Intel Corporation
+This program and the accompanying materials are made available under the terms of the Eclipse Public License v1.0, 
+ which accompanies this distribution, and is available at http://www.eclipse.org/legal/epl-v10.html . https://github.com/viqet
+ Contributors:
+    Intel Corporation - initial API and implementation and/or initial documentation
+-->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style x:Key="ButtonStyle" TargetType="Button">
+        <Setter Property="Foreground" Value="#FFE9EAEA"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Rectangle Fill="{TemplateBinding Background}" />
+                        <ContentPresenter Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.FontFamily="Verdana"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Opacity" Value="0.80"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="ButtonNoBackgroundStyle" TargetType="Button">
+        <Setter Property="Foreground" Value="#FFE9EAEA"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <ContentPresenter Name="Content" Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.FontFamily="Verdana"/>
+                            <Rectangle Fill="#FFE9EAEA" Height="1" Width="{Binding ElementName=Content, Path=ActualWidth}" />
+                        </StackPanel>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Opacity" Value="0.80"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="ButtonWithLeftIconStyle" TargetType="Button">
+        <Setter Property="Foreground" Value="#FFE9EAEA"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="3.5*"/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Grid.Column="0" Grid.ColumnSpan="2" Fill="{TemplateBinding Background}" Stretch="Fill"/>
+                        <ContentPresenter Grid.Column="1"  Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.FontFamily="Verdana"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Opacity" Value="0.80"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="ButtonWithRightIconStyle" TargetType="Button">
+        <Setter Property="Foreground" Value="#FFE9EAEA"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3.5*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Rectangle Grid.Column="0" Grid.ColumnSpan="2" Fill="{TemplateBinding Background}" Stretch="Fill"/>
+                        <ContentPresenter Grid.Column="0"  Content="{TemplateBinding Content}" HorizontalAlignment="Center" VerticalAlignment="Center" TextBlock.FontFamily="Verdana"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Opacity" Value="0.80"/>
+                            <!--<Setter.Value>
+                                    <ImageBrush ImageSource="/Assets/DeleteOff.png"/>
+                                </Setter.Value>
+                            </Setter>-->
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="ButtonIconStyle" TargetType="Button">
+        <Setter Property="Foreground" Value="#FFE9EAEA"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Rectangle Fill="{TemplateBinding Background}" Stretch="Fill"/>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Opacity" Value="0.80"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="TabItemHeaderStyle" TargetType="TabItem">
+        <Setter Property="Header">
+            <Setter.Value>
+                <Border x:Name="border" Background="Black">
+                    <TextBlock Foreground="White"/>
+                </Border>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
