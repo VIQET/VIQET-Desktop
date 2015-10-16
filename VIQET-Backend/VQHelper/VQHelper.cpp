@@ -81,8 +81,7 @@ VisualizationImage^ CreateVisualizationImage(String^ visualizationName, String^ 
 
 int HelperClass::GetBackendVersion()
 {
-  //MMAhmed, updated version to 104 with Detail removed and multiScaleTextureAcutance added.
-	return 114;
+	return 115;
 }
 
 Summary^ HelperClass::ValueSummary(List<double>^ values)

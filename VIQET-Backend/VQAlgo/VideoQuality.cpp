@@ -1133,7 +1133,7 @@ vector<double> VideoQuality::Calculate_Noise2(IplImage *img, std::string directo
 		struct svm_model* input_model;
 		if((input_model=svm_load_model(model_file.c_str()))==0)
 		{	
-			fprintf(stderr,"can't open model file %s\n", model_file.c_str());			
+			//fprintf(stderr,"can't open model file %s\n", model_file.c_str());			
 			for(int i = 0; i < resultLength; i++)
 			{
 				finalResult.push_back((double)(-3.142)); 
@@ -1571,7 +1571,7 @@ bool VideoQuality::PrintStringVectorToFile(string fileName, std::vector<string> 
 	tempOutfile1.open (fileName.c_str(),ios::app);
 	if(!tempOutfile1.is_open())
 	{
-		cout<<"Can not open file. Please verify the path and filename!"<<endl;
+		//cout<<"Can not open file. Please verify the path and filename!"<<endl;
 		return FALSE;
 	}
 
@@ -2196,10 +2196,10 @@ FrameData* VideoQuality::AnalyzePhoto(std::string& sourceFileName, std::string& 
 		frame_data_map.clear();
 		frame_data_map.clear();
 	}
-	else
-	{
-		cout<<"Input  file does not exist. Please verify."<<endl;
-	}
+	//else
+	//{
+	//	cout<<"Input  file does not exist. Please verify."<<endl;
+	//}
 	
 	return frameData;
 }
@@ -2215,6 +2215,7 @@ double VideoQuality::MOS(std::string& category,
 	
 	int uniqueNo = rand();
 
+	/*
 	string inputFile_string = directory + "\\" + std::to_string(uniqueNo) + "photoFeatures.txt";
 	const char* inputFile = inputFile_string.c_str();
 	string outputFile_string = directory + "\\" + std::to_string(uniqueNo) + "mos.txt";
@@ -2222,6 +2223,7 @@ double VideoQuality::MOS(std::string& category,
 
 	remove(inputFile);  // delete entries of last run !
 	remove(outputFile); // delete predictions of last run !
+	*/
 
 	int noOfAttributes = bigVectorOfResults.size();
 	int noOfEntries = bigVectorOfResults[0].size();
@@ -2329,16 +2331,17 @@ double VideoQuality::MOS(std::string& category,
 		testDataSVM.push_back(x);	
 
 		//debugging
-		FILE *fp = fopen("c:\\temp\\path.txt","wt");
+		/*FILE *fp = fopen("c:\\temp\\path.txt","wt");
 		const char *name = model_file.c_str();
 		if(fp==NULL) return NULL;
 		fprintf(fp, "model file name = %s\n",model_file.c_str());
 		fclose(fp);
+		*/
 
 		struct svm_model* input_model;
 		if((input_model=svm_load_model(model_file.c_str()))==0)
 		{	
-			fprintf(stderr,"can't open model file %s\n", model_file.c_str());	
+			//fprintf(stderr,"can't open model file %s\n", model_file.c_str());	
 			return(-3.142); 		
 		}
 		
