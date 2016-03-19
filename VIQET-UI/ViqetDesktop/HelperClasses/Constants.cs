@@ -19,7 +19,7 @@ namespace ViqetDesktop
 {
     public static class Constants
     {
-        private const string AppVersion = "0";
+        private const string AppVersion = "2";
 
         private const string UIVersion = "87";
 
