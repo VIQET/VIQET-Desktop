@@ -100,6 +100,7 @@ private:
 	static const void Calculate_Noise2(IplImage *img, vector<double>& Noise_vector2, std::string directory, std::string mosModel);
 	static const void Calculate_ColorWarmth(IplImage *img, double &ColorWarmth);
 	static const void Calculate_OverAndUnderExposure(IplImage *img, double& percentageOverExposure, double& percentageUnderExposure, bool dummy);
+	static const void Compute_NSS(IplImage *gimg, vector<double>& NSS_features);
 	
 	//non threaded
 	double Calculate_Contrast(IplImage *gimg,bool heatmap,vector<vector<double>>& totalvec);
@@ -108,10 +109,7 @@ private:
 	double Calculate_DynamicRange(IplImage *img);
 	double Calculate_ColorWarmth(IplImage *img);
 	void Calculate_OverAndUnderExposure(IplImage *img, double& percentageOverExposure, double& percentageUnderExposure);
-
 	double Calculate_Noise1(IplImage *img,double& Noise_val1); 
-	
-
 	double Calculate_Sharpness3(IplImage *img);
 	double Calculate_Sharpness4(IplImage *img, double& detail, bool onlyDetail);
 	vector<double> Calculate_Sharpness5(IplImage *img);
@@ -119,6 +117,7 @@ private:
 	vector<double> VideoQuality::Calculate_Noise2(IplImage *img, std::string directory, std::string mosModel);
 	vector<double> VideoQuality::Calculate_Noise3(IplImage *img);
 	vector<double> VideoQuality::Compute_GammaMatrix(IplImage *img, int block_size);
+	vector<double> Compute_NSS(IplImage *img);
 
 	//helper
 	cv::Mat VideoQuality::CannyEdgeDetect(cv::Mat input_gimgMat);

@@ -53,9 +53,8 @@ class FrameData{
 		double final_noise;
 		double resizedImage_final_noise;
 		double mos;
-		//MMAhmed, 02/12/2015. Added this to calcuate the average of last 5 values of bigVectorOfOtherResults vector.
 		double multiScaleTextureAcutance;
-
+		vector<double> NSS_features;
 	//used by images
 		void setValues(	string outputSharpness_File,
 						string outputDR_File,
@@ -92,7 +91,8 @@ class FrameData{
 						vector<double> resizedImage_gammaMatrix_vector_val,
 						double final_noise_val,
 						double resizedImage_final_noise_val,
-						double msta)
+						double msta,
+						vector<double> NSS_features_val)
 		{
 		    SharpnessFile=outputSharpness_File;
 			DRHistogramFile=outputDR_File;
@@ -128,6 +128,7 @@ class FrameData{
 			resizedImage_noise3_vector=resizedImage_noise3_vector_val;
 			resizedImage_gammaMatrix_vector=resizedImage_gammaMatrix_vector_val;
 			multiScaleTextureAcutance = msta;
+			NSS_features=NSS_features_val;
 			if(resizedImage_all_sharpness_val.size() == 9)
 			{
 				final_sharpness_displayed= (std::pow((

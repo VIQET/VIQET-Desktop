@@ -97,7 +97,7 @@ void Calculate_Sigma(Mat& channel,int Gaussian_window,Mat& sigma)
 	cv::pow(channel,2.0,sqreGImage);
 
 	//Gaussian filter on  image
-	cv::Mat mu(channel.size().height,channel.size().width,type); //new image in Mat format
+	cv::Mat mu(channel.size().height,channel.size().width,type); 
 
 	cv::GaussianBlur( channel, mu, cv::Size( Gaussian_window,Gaussian_window ), (Gaussian_window/6.0),(Gaussian_window/6.0) ,BORDER_REPLICATE);
 	//Square the image mu to calculate muSQ
@@ -126,8 +126,8 @@ double  VideoQuality::Calculate_Contrast(IplImage *img,bool heatmap,vector<vecto
 	double contrast=0;
 	double min2, max2;
 	CvPoint minl, maxl;
-	IplImage *gimg= cvCreateImage( cvSize( img->width, img->height ), IPL_DEPTH_8U, 1 );					 //create a new grayscale image
-	cvCvtColor(img,gimg,CV_BGR2GRAY);	//convert original image to grayscale image
+	IplImage *gimg= cvCreateImage( cvSize( img->width, img->height ), IPL_DEPTH_8U, 1 );					 
+	cvCvtColor(img,gimg,CV_BGR2GRAY);	
 	vector<double> colvec;
 	
 	for(int r=0; r<(gimg->height);r+=size_N)
@@ -175,8 +175,8 @@ double VideoQuality::Calculate_Exposure(IplImage *img)
 {
 	int count=0;
 	double contrast=0;
-	IplImage *gimg= cvCreateImage( cvSize( img->width, img->height ), IPL_DEPTH_8U, 1 );						 //create a new grayscale image
-	cvCvtColor(img,gimg,CV_BGR2GRAY);																			//convert original image to grayscale image
+	IplImage *gimg= cvCreateImage( cvSize( img->width, img->height ), IPL_DEPTH_8U, 1 );						 
+	cvCvtColor(img,gimg,CV_BGR2GRAY);																			
 	multimap <double,double> std_array;
 	double median_val=0;
 	int r =0,c=0;
@@ -192,8 +192,8 @@ double VideoQuality::Calculate_Exposure(IplImage *img)
 		{
 			old_roi = cvGetImageROI(gimg);
 			cvSetImageROI(gimg, cvRect(c,r,min(size_N,(gimg->width-c)),min(size_N,(gimg->height-r))));
-			cvAvgSdv(gimg,mean,std,0);																			 // calculate average Std deviation
-			std_sum+=std->val[0];																				// to calculate average later- sum it up
+			cvAvgSdv(gimg,mean,std,0);																			
+			std_sum+=std->val[0];																				
 			count++;
 
 			//calculate mean for this block
@@ -228,8 +228,8 @@ double VideoQuality::Calculate_Exposure(IplImage *img)
 double VideoQuality::Calculate_DynamicRange(IplImage *img)
 {
 	int count=0;
-	IplImage *gimg= cvCreateImage( cvSize( img->width, img->height ), IPL_DEPTH_8U, 1 );						//create a new grayscale image
-	cvCvtColor(img,gimg,CV_BGR2GRAY);																			//convert original image to grayscale image
+	IplImage *gimg= cvCreateImage( cvSize( img->width, img->height ), IPL_DEPTH_8U, 1 );						
+	cvCvtColor(img,gimg,CV_BGR2GRAY);																			
 
 	int numBins = 256;
 	float range[] = {0, 255};
@@ -396,7 +396,7 @@ void VideoQuality::ReadGaborFilters(int set, int scale, int orientation, int siz
 {
 	string line; 
 	int line_number = 0;
-	double x[100][100] ; // large enough space
+	double x[100][100] ; 
 
 	char set_str[4], scale_str[4], ori_str[4];
 	sprintf(  set_str, "%d", set);
@@ -611,7 +611,6 @@ void VideoQuality::Calculate_Mean_n_Std_n_Range_of_StdforEverySubImagesOfSizeN(c
 
 void VideoQuality::Calculate_OverAndUnderExposure(IplImage *img, double& percentageOverExposure, double& percentageUnderExposure)
 {
-	//create a new grayscale image
 	IplImage *gimg= cvCreateImage( cvSize( img->width, img->height ), IPL_DEPTH_8U, 1 );						
 	cvCvtColor(img,gimg,CV_BGR2GRAY);
 	cv::Mat gimgMat(gimg,true);
@@ -875,7 +874,7 @@ vector<double> VideoQuality::Calculate_Noise3(IplImage *img)
 	cv::Mat gimgMat_double;
 	gimgMat.convertTo(gimgMat_double, CV_64F);
 	 
-	// get all Gabor filters here !
+	// get all Gabor filters here 
 	// outer vector for orient and the inner for size;
 	int Size[4] = { 45, 25, 13, 7};
 	vector<vector<cv::Mat>> gaborFilters;
@@ -1011,8 +1010,6 @@ vector<double> VideoQuality::Calculate_Noise3(IplImage *img)
 vector<double> VideoQuality::Calculate_Noise2(IplImage *img, std::string directory, std::string mosModel)
 {
 	const int resultLength = 3;
-
-	//create a new grayscale image
 	IplImage *gimg= cvCreateImage( cvSize( img->width, img->height ), IPL_DEPTH_8U, 1 );						
 	cvCvtColor(img,gimg,CV_BGR2GRAY);
 	cv::Mat gimgMat(gimg,true);
@@ -1025,7 +1022,6 @@ vector<double> VideoQuality::Calculate_Noise2(IplImage *img, std::string directo
 
 	int block_size = ceil(min(gimgMat_double.rows,gimgMat_double.cols)/8);
 
-	// initialize the vector of vector
 	vector<vector<double>> allResult;
 	for(int i = 0; i < resultLength; i++)
 	{
@@ -1142,7 +1138,7 @@ vector<double> VideoQuality::Calculate_Noise2(IplImage *img, std::string directo
 		}
 		
 		SVMClass svmTestObject;
-		svmTestObject.main_svmPredictFileless(1, testDataSVM, input_model, predictedLabels, classProbability); //classProbability[i][1] has needed probability !
+		svmTestObject.main_svmPredictFileless(1, testDataSVM, input_model, predictedLabels, classProbability); 
 	
 		
 	}
@@ -1285,6 +1281,355 @@ double VideoQuality::Calculate_Noise1(IplImage *img,double& Noise_val1)
 
 }
 
+
+Mat circshift(Mat inp, int* shift)
+{
+	if (shift[0]==0 & shift[1]==0)
+		return inp;
+	shift[0]=(shift[0]+inp.rows)%inp.rows;
+	shift[1]=(shift[1]+inp.cols)%inp.cols;
+
+	Mat op= Mat::zeros(inp.rows, inp.cols, CV_64FC1);
+	inp(Range(0, op.rows-shift[0]), Range(0, op.cols-shift[1])).copyTo(op(Range(shift[0], op.rows), Range(shift[1], op.cols)));
+	if (shift[0]!=0)
+		inp(Range(op.rows-shift[0], op.rows), Range(0, op.cols-shift[1])).copyTo(op(Range(0, shift[0]), Range(shift[1], op.cols)));
+	if (shift[1]!=0)
+	  inp(Range(0, op.rows-shift[0]), Range(op.cols-shift[1], op.cols)).copyTo(op(Range(shift[0], op.rows), Range(0, shift[1])));
+	if (shift[0]*shift[1]!=0)
+      inp(Range(op.rows-shift[0],op.rows), Range(op.cols-shift[1],op.cols)).copyTo(op(Range(0, shift[0]), Range(0, shift[1])));	
+	return op;
+}
+
+vector<double> estimate_GGD_param(Mat inp)
+{		
+
+	double start = 0.001, inc = 0.001;
+	vector<double> gam(20 / inc, 0), r_gam(20 / inc, 0);
+	int ind, ind_row, ind_col;
+	Mat mask_lt_0(inp.rows, inp.cols, CV_64FC1, Scalar(0));
+	Mat mask_gt_0(inp.rows, inp.cols, CV_64FC1, Scalar(0));
+
+	for (ind_col = 0; ind_col < inp.cols; ind_col++)
+	{
+		for (ind_row = 0; ind_row < inp.rows; ind_row++)
+		{
+			if (inp.at<double>(ind_row, ind_col) > 0)
+			{
+				mask_gt_0.at<double>(ind_row, ind_col) = 1;
+			}
+			else if (inp.at<double>(ind_row, ind_col) < 0)
+			{
+				mask_lt_0.at<double>(ind_row, ind_col) = 1;
+			}
+			else
+			{
+			}
+		}
+	}
+
+
+
+	mask_lt_0.convertTo(mask_lt_0, CV_8UC1);
+	mask_gt_0.convertTo(mask_gt_0, CV_8UC1);
+
+	for (ind = 0; ind < 20 / inc; ind++)
+	{
+		gam[ind] = inc*(ind + 1);
+		//r_gam[ind] = 0;
+		r_gam[ind] = pow(Gamma(2 / gam[ind]), 2) / (Gamma(1 / gam[ind])*Gamma(3 / gam[ind]));
+	}
+		
+
+	Mat inp_sqr;
+	pow(inp, 2, inp_sqr);
+	double leftstd = sqrt(mean(inp_sqr, mask_lt_0)[0]);
+	double rightstd = sqrt(mean(inp_sqr, mask_gt_0)[0]);
+
+	double gammahat = leftstd / (0.0000001 + rightstd);
+	double rhat = pow(mean(abs(inp))[0], 2) / mean(inp_sqr)[0];
+	double rhatnorm = (rhat*(pow(gammahat, 3) + 1)*(gammahat + 1)) / pow(pow(gammahat, 2) + 1, 2);
+
+	vector<double> r_gam_sqr(gam.size(), 0);
+
+	for (ind = 0; ind < r_gam.size(); ind++)
+	{
+		r_gam_sqr[ind] = pow(r_gam[ind] - rhatnorm, 2);
+	}
+
+
+	
+	double minVal, maxVal;
+	Point minpos, maxpos;
+	minMaxLoc(Mat(r_gam_sqr), &minVal, &maxVal, &minpos, &maxpos);
+	int min_ind = minpos.y;
+	double alpha = gam[min_ind];
+	double betal, betar;
+	
+	if (!cvIsNaN(sqrt(Gamma(1 / alpha) / Gamma(3 / alpha))))
+	{
+		betal = leftstd *sqrt(Gamma(1 / alpha) / Gamma(3 / alpha));
+		betar = rightstd*sqrt(Gamma(1 / alpha) / Gamma(3 / alpha));
+	}
+	else
+	{
+		betal = 0;
+		betar = 0;
+	}
+	double beta_mean=(betal+betar)/2;
+
+	Scalar inp_mean, inp_std, inp_abs_mean, inp_abs_std;
+	meanStdDev(inp, inp_mean, inp_std);
+	meanStdDev(abs(inp), inp_abs_mean, inp_abs_std);
+	vector<double> op;
+	
+	op.push_back(alpha);
+	op.push_back(beta_mean);
+	op.push_back(inp_abs_mean[0]);
+	op.push_back(inp_std[0]);
+	
+	return(op);
+}
+
+Mat Read_inp_from_txt_file(const char* filename)
+{
+	std::ifstream file(filename);  // assume the file opens correctly
+
+	Mat matrix(1200, 1900, CV_64FC1, Scalar(0));
+	int row = 0, col = 0;
+
+	std::string line;
+	while (std::getline(file, line))
+	{
+		std::istringstream stream(line);
+
+		double x;
+		col = 0;  // reset column counter
+		while (stream >> x)
+		{
+			matrix.at<double>(row, col) = x;
+			col++;
+		}
+		row++;
+	}
+	return matrix;
+}
+
+vector<double>  VideoQuality::Compute_NSS(IplImage *img)
+{
+	IplImage *gimg= cvCreateImage( cvSize( img->width, img->height ), IPL_DEPTH_8U, 1 );
+	cvCvtColor(img,gimg,CV_BGR2GRAY);
+	Mat srcGray(gimg,true);
+	Mat im, blk, blk_dct;
+	srcGray.convertTo(im, CV_64FC1);
+	
+	//const char* filename = "C:\\Users\\hkishan\\Documents\\NSScode from Michele\\inp_matrix.txt";
+ 	//im = Read_inp_from_txt_file(filename);
+	//im.convertTo(im, CV_64FC1);
+
+	int blk_size = 34, blk_overlap = 17;
+	int  ind_row, ind_col, i_count, j_count, ind, ind_mat;
+
+	double	thresh = 0.001;
+	Mat dct_row1, dct_col1, dct_diag1, dct_diag2;
+	Mat blk_horz_low = Mat::zeros(floor((im.rows-blk_size)/blk_overlap)+1, floor((im.cols-blk_size)/blk_overlap)+1, CV_64FC1);
+	Mat blk_horz_mid = Mat::zeros(floor((im.rows-blk_size)/blk_overlap)+1, floor((im.cols-blk_size)/blk_overlap)+1, CV_64FC1);
+	Mat blk_horz_high = Mat::zeros(floor((im.rows-blk_size)/blk_overlap)+1, floor((im.cols-blk_size)/blk_overlap)+1, CV_64FC1);
+
+	Mat blk_vert_low = Mat::zeros(floor((im.rows-blk_size)/blk_overlap)+1, floor((im.cols-blk_size)/blk_overlap)+1, CV_64FC1);
+	Mat blk_vert_mid = Mat::zeros(floor((im.rows-blk_size)/blk_overlap)+1, floor((im.cols-blk_size)/blk_overlap)+1, CV_64FC1);
+	Mat blk_vert_high = Mat::zeros(floor((im.rows-blk_size)/blk_overlap)+1, floor((im.cols-blk_size)/blk_overlap)+1, CV_64FC1);
+
+	Mat blk_diag1_low = Mat::zeros(floor((im.rows-blk_size)/blk_overlap)+1, floor((im.cols-blk_size)/blk_overlap)+1, CV_64FC1);
+	Mat blk_diag1_mid = Mat::zeros(floor((im.rows-blk_size)/blk_overlap)+1, floor((im.cols-blk_size)/blk_overlap)+1, CV_64FC1);
+	Mat blk_diag1_high = Mat::zeros(floor((im.rows-blk_size)/blk_overlap)+1, floor((im.cols-blk_size)/blk_overlap)+1, CV_64FC1);
+
+	Mat blk_diag2_low = Mat::zeros(floor((im.rows-blk_size)/blk_overlap)+1, floor((im.cols-blk_size)/blk_overlap)+1, CV_64FC1);
+	Mat blk_diag2_mid = Mat::zeros(floor((im.rows-blk_size)/blk_overlap)+1, floor((im.cols-blk_size)/blk_overlap)+1, CV_64FC1);
+	Mat blk_diag2_high = Mat::zeros(floor((im.rows-blk_size)/blk_overlap)+1, floor((im.cols-blk_size)/blk_overlap)+1, CV_64FC1);
+
+	j_count = 0;
+	for (ind_col = 0; ind_col < im.cols - blk_size; ind_col += blk_overlap)
+	{
+		i_count = 0;
+		for (ind_row = 0; ind_row < im.rows - blk_size; ind_row += blk_overlap)
+		{
+			blk = im(Range(ind_row, min(ind_row + blk_size, im.rows)), Range(ind_col, min(ind_col + blk_size, im.cols)));
+			dct(blk, blk_dct);
+				
+			dct_row1=blk_dct(Range(0,1), Range(1, blk_dct.cols));
+			dct_col1=blk_dct(Range(1,blk_dct.rows), Range(0,1));
+			dct_diag1=blk_dct.diag(0);
+			dct_diag1=dct_diag1(Range(1,dct_diag1.rows), Range(0,dct_diag1.cols));
+
+			blk_vert_low.at<double>(i_count, j_count)=mean(dct_row1(Range(0,dct_row1.rows), Range(0, floor(blk_size/3-1))))[0];
+			blk_vert_mid.at<double>(i_count, j_count)=mean(dct_row1(Range(0,dct_row1.rows), Range(floor(blk_size/3)-1, 2*floor(blk_size/3)-1)))[0];
+			blk_vert_high.at<double>(i_count, j_count)=mean(dct_row1(Range(0,dct_row1.rows), Range(2*floor(blk_size/3)-1, dct_row1.cols)))[0];
+
+			blk_horz_low.at<double>(i_count, j_count)=mean(dct_col1(Range(0, floor(blk_size/3)-1),Range(0,dct_col1.cols)))[0];
+			blk_horz_mid.at<double>(i_count, j_count)=mean(dct_col1(Range(floor(blk_size/3)-1, 2*floor(blk_size/3)-1), Range(0,dct_col1.cols)))[0];
+			blk_horz_high.at<double>(i_count, j_count)=mean(dct_col1( Range(2*floor(blk_size/3)-1, dct_col1.rows), Range(0,dct_col1.cols)))[0];
+			
+			blk_diag1_low.at<double>(i_count, j_count)=mean(dct_diag1(Range(0, floor(blk_size/3)-1),Range(0,dct_diag1.cols)))[0];
+			blk_diag1_mid.at<double>(i_count, j_count)=mean(dct_diag1(Range(floor(blk_size/3)-1, 2*floor(blk_size/3)-1), Range(0,dct_diag1.cols)))[0];
+			blk_diag1_high.at<double>(i_count, j_count)=mean(dct_diag1( Range(2*floor(blk_size/3)-1, dct_diag1.rows), Range(0,dct_diag1.cols)))[0];
+ 
+			Mat dct_diag2=Mat::zeros(blk_dct.rows, 1, CV_64FC1);
+
+			for (int ind_diag2=0;ind_diag2<blk_dct.rows;ind_diag2++)
+			{
+				dct_diag2.at<double>(ind_diag2,0) = blk_dct.at<double>(ind_diag2,blk_dct.cols-ind_diag2-1);
+			}
+			blk_diag2_low.at<double>(i_count, j_count)=mean(dct_diag2(Range(0, floor(blk_size/3)-1),Range(0,dct_diag2.cols)))[0];
+			blk_diag2_mid.at<double>(i_count, j_count)=mean(dct_diag2(Range(floor(blk_size/3)-1, 2*floor(blk_size/3)-1), Range(0,dct_diag2.cols)))[0];
+			blk_diag2_high.at<double>(i_count, j_count)=mean(dct_diag2( Range(2*floor(blk_size/3)-1, dct_diag2.rows), Range(0,dct_diag2.cols)))[0];
+
+			i_count++;
+		}
+		j_count++;
+		
+	}
+		
+	
+	vector<Mat> consol_dct;
+
+	consol_dct.push_back(blk_vert_low);
+	consol_dct.push_back(blk_vert_mid);
+	consol_dct.push_back(blk_vert_high);
+	consol_dct.push_back(blk_horz_low);
+	consol_dct.push_back(blk_horz_mid);
+	consol_dct.push_back(blk_horz_high);
+	consol_dct.push_back(blk_diag1_low);
+	consol_dct.push_back(blk_diag1_mid);
+	consol_dct.push_back(blk_diag1_high);
+	consol_dct.push_back(blk_diag2_low);
+	consol_dct.push_back(blk_diag2_mid);
+	consol_dct.push_back(blk_diag2_high);
+
+	int shifts[][2] = {0,1,1,0,1,1,1,-1};
+	int ind_ele, ind_shift, ind_mod_ele;
+	
+	size_t num_shifts=sizeof(shifts)/sizeof(shifts[0]);
+	size_t num_pars_GGD=4;
+	int num_freq_partitions=3;
+
+	Mat GGD_params=Mat::zeros(num_pars_GGD,1, CV_64FC1);
+	Mat ratio_features=Mat::zeros(num_pars_GGD,1, CV_64FC1);
+	Mat ratio_high_mid=Mat::zeros(num_pars_GGD,1, CV_64FC1);
+	Mat ratio_mid_low=Mat::zeros(num_pars_GGD,1, CV_64FC1);
+	Mat ratio_vert_diag1=Mat::zeros(num_pars_GGD,1, CV_64FC1);
+	Mat ratio_diag2_horz=Mat::zeros(num_pars_GGD,1, CV_64FC1);
+	Mat ratio_ori=Mat::zeros(num_pars_GGD,1, CV_64FC1);
+
+	Mat GGD_diff_neigh=Mat::zeros(num_pars_GGD*num_shifts,1, CV_64FC1);
+	vector<double> GGD_params_vec;
+	Mat mat_freq_or=Mat::zeros(num_pars_GGD*num_shifts, 1,  CV_64FC1);
+	Mat temp, shifted_dct, diff_dct;
+
+	for (ind_ele=0;ind_ele<consol_dct.size();ind_ele++)
+	{
+		ind_mod_ele=ind_ele%num_freq_partitions;
+		GGD_params_vec = estimate_GGD_param(consol_dct[ind_ele]-mean(consol_dct[ind_ele])[0]);
+		hconcat(GGD_params, Mat(GGD_params_vec), GGD_params);
+
+		if ((ind_mod_ele==1 || ind_mod_ele==2))
+		{
+			divide(GGD_params(Range(0, GGD_params.rows), Range(ind_ele+1,ind_ele+2)), GGD_params(Range(0, GGD_params.rows), Range(ind_ele,ind_ele+1)), temp);
+			hconcat(ratio_mid_low, temp, ratio_mid_low);
+			hconcat(ratio_features,temp,ratio_features);
+
+		}
+	
+
+		if (ind_ele==8)
+		{
+			divide(GGD_params(Range(0, GGD_params.rows), Range(ind_ele-7,ind_ele-4)), GGD_params(Range(0, GGD_params.rows), Range(ind_ele-1,ind_ele+2)),  temp);
+			hconcat(ratio_vert_diag1, temp, ratio_vert_diag1);
+		}
+		else if (ind_ele==11)
+		{
+			divide(GGD_params(Range(0, GGD_params.rows), Range(ind_ele-1,ind_ele+2)), GGD_params(Range(0, GGD_params.rows), Range(ind_ele-7,ind_ele-4)), temp);
+			hconcat(ratio_diag2_horz, temp, ratio_diag2_horz);
+		}
+
+		Mat col_matrix=Mat::zeros(1,1,CV_64FC1);
+		for (ind_shift=0; ind_shift<num_shifts; ind_shift++)
+		{		
+			shifted_dct=circshift(consol_dct[ind_ele],shifts[ind_shift]); 
+			diff_dct=consol_dct[ind_ele]-shifted_dct;
+			GGD_params_vec = estimate_GGD_param(diff_dct-mean(diff_dct)[0]);
+			vconcat(col_matrix, Mat(GGD_params_vec), col_matrix);	
+		}
+		col_matrix=col_matrix(Range(1,col_matrix.rows), Range(0,col_matrix.cols));
+		hconcat(mat_freq_or, col_matrix, mat_freq_or);
+
+
+		if ((ind_ele+1)%3==0)
+		{
+			divide(mat_freq_or(Range(0,mat_freq_or.rows), Range(3, 4) ), mat_freq_or( Range(0,mat_freq_or.rows), Range(2, 3)), temp);
+			hconcat(mat_freq_or, temp, mat_freq_or);
+			mat_freq_or=mat_freq_or(Range(0,mat_freq_or.rows), Range(1,mat_freq_or.cols));
+			hconcat(GGD_diff_neigh, mat_freq_or, GGD_diff_neigh);
+			mat_freq_or=Mat::zeros(num_pars_GGD*num_shifts, 1,  CV_64FC1);
+		}
+
+	}
+	GGD_diff_neigh=GGD_diff_neigh(Range(0, GGD_diff_neigh.rows), Range(1, GGD_diff_neigh.cols));
+	vector<double> neighborhood_features;
+	vector<double> alpha_abs_neigh, beta_mean_neigh,mu_abs_neigh, std_abs_neigh, vec_temp;
+
+
+	for (ind_col=0;ind_col<GGD_diff_neigh.cols;ind_col+=(1+num_freq_partitions))
+	{
+
+		for (ind_row=0;ind_row<GGD_diff_neigh.rows;ind_row+=num_pars_GGD)		
+			{
+				vec_temp = Mat2Vector(GGD_diff_neigh(Range(ind_row,ind_row+1),Range(ind_col,ind_col+num_freq_partitions+1)));
+				alpha_abs_neigh.insert(alpha_abs_neigh.end(),vec_temp.begin(), vec_temp.end());
+				
+				vec_temp = Mat2Vector(GGD_diff_neigh(Range(ind_row+1,ind_row+2),Range(ind_col,ind_col+num_freq_partitions+1)));
+				beta_mean_neigh.insert(beta_mean_neigh.end(),vec_temp.begin(), vec_temp.end());
+
+				vec_temp = Mat2Vector(GGD_diff_neigh(Range(ind_row+2,ind_row+3),Range(ind_col,ind_col+num_freq_partitions+1)));
+				mu_abs_neigh.insert(mu_abs_neigh.end(),vec_temp.begin(), vec_temp.end());
+
+				vec_temp = Mat2Vector(GGD_diff_neigh(Range(ind_row+3,ind_row+4),Range(ind_col,ind_col+num_freq_partitions+1)));
+				std_abs_neigh.insert(std_abs_neigh.end(),vec_temp.begin(), vec_temp.end());
+			}
+	}
+	vector<double> set4_neighbor_features;
+	set4_neighbor_features.insert(set4_neighbor_features.end(),alpha_abs_neigh.begin(),alpha_abs_neigh.end());
+	set4_neighbor_features.insert(set4_neighbor_features.end(),beta_mean_neigh.begin(),beta_mean_neigh.end());
+	set4_neighbor_features.insert(set4_neighbor_features.end(),mu_abs_neigh.begin(),mu_abs_neigh.end());
+	set4_neighbor_features.insert(set4_neighbor_features.end(),std_abs_neigh.begin(),std_abs_neigh.end());
+
+	ratio_vert_diag1=ratio_vert_diag1(Range(0,ratio_vert_diag1.rows),Range(1,ratio_vert_diag1.cols));
+	ratio_diag2_horz=ratio_diag2_horz(Range(0,ratio_diag2_horz.rows),Range(1,ratio_diag2_horz.cols));
+
+	for (ind_col=0;ind_col<ratio_vert_diag1.cols;ind_col++)
+	{
+		temp=ratio_vert_diag1(Range(0,ratio_vert_diag1.rows), Range(ind_col,ind_col+1));
+		hconcat(ratio_ori, temp, ratio_ori);
+
+		temp=ratio_diag2_horz(Range(0,ratio_diag2_horz.rows), Range(ind_col,ind_col+1));
+		hconcat(ratio_ori,temp, ratio_ori);
+	}
+	GGD_params=GGD_params(Range(0,GGD_params.rows),Range(1,GGD_params.cols));
+	ratio_features=ratio_features(Range(0,ratio_features.rows),Range(1,ratio_features.cols));
+	ratio_ori=ratio_ori(Range(0,ratio_ori.rows),Range(1,ratio_ori.cols));
+	
+	vector<double> set4_features1=Mat2Vector(GGD_params);
+	vector<double> set4_ratio_features=Mat2Vector(ratio_features);
+	vector<double> set4_ori_features=Mat2Vector(ratio_ori);
+			
+	vector<double> NSS_feat;
+	NSS_feat.insert(NSS_feat.end(), set4_neighbor_features.begin(), set4_neighbor_features.end());
+	//NSS_feat.insert(NSS_feat.end(), set4_ori_features.begin(), set4_ori_features.end());
+	//NSS_feat.insert(NSS_feat.end(), set4_ratio_features.begin(), set4_ratio_features.end());
+	//NSS_feat.insert(NSS_feat.end(), set4_features1.begin(), set4_features1.end());
+
+	return(NSS_feat);
+}
+
 /////////////////////////////////thread methods/////////////////////////
 const void  VideoQuality::Calculate_Contrast(IplImage *img,double &Contrast_val)
 {
@@ -1357,6 +1702,12 @@ const void VideoQuality::Calculate_Noise2(IplImage *img, vector<double>& Noise_v
 	Noise_vector2 = vq->Calculate_Noise2(img, directory, mosModel);
 }
 
+const void VideoQuality::Compute_NSS(IplImage *img, vector<double>& NSS_feat)
+{
+	VideoQuality* vq= pGetInstance();
+	NSS_feat = vq->Compute_NSS(img);
+}
+
 void VideoQuality::WriteResultsToBigVectors(FrameData& cFrame, 
 											int numOfAttributesInputVector, 
 											std::string& input_file,
@@ -1364,60 +1715,59 @@ void VideoQuality::WriteResultsToBigVectors(FrameData& cFrame,
 											vector<vector<double>>& bigVectorOfOtherResults,
 											vector<string>& bigVectorOfFileNames)
 {
-	if(bigVectorOfResults.size() == 0)
-	{
-		for(int i =0 ; i< numOfAttributesInputVector; i++)
-		{
-			vector<double> result;
-			bigVectorOfResults.push_back(result);
-		}
-	}
 
 	if(cFrame.resizedImage_noise3_vector[0]>1.8)
 			cFrame.resizedImage_noise3_vector[0] = 1.8;
+	double R[8];
 
-	bigVectorOfResults[0].push_back(cFrame.resizedImage_noise3_vector[0]);
-	bigVectorOfResults[1].push_back(cFrame.resizedImage_final_noise);
-	bigVectorOfResults[2].push_back(cFrame.dynamicRange);
-	bigVectorOfResults[3].push_back(cFrame.exposure*cFrame.contrast);
-	bigVectorOfResults[4].push_back(cFrame.resizedImage_sharpness4);
-	bigVectorOfResults[5].push_back(cFrame.resizedImage_details);
-	bigVectorOfResults[6].push_back(cFrame.resizedImage_all_sharpness[0]);
-	bigVectorOfResults[7].push_back(cFrame.resizedImage_all_sharpness[1]);
-	bigVectorOfResults[8].push_back(cFrame.resizedImage_all_sharpness[2]);
-	bigVectorOfResults[9].push_back(cFrame.resizedImage_all_sharpness[3]);
-	bigVectorOfResults[10].push_back(cFrame.resizedImage_all_sharpness[4]);
-	bigVectorOfResults[11].push_back(cFrame.resizedImage_all_sharpness[5]);
-	bigVectorOfResults[12].push_back(cFrame.resizedImage_all_sharpness[6]);
-	bigVectorOfResults[13].push_back(cFrame.resizedImage_all_sharpness[7]);
-	bigVectorOfResults[14].push_back(cFrame.resizedImage_all_sharpness[8]);
+	double tempSum = (cFrame.resizedImage_gammaMatrix_vector[19] + cFrame.resizedImage_gammaMatrix_vector[20] + cFrame.resizedImage_gammaMatrix_vector[21] + cFrame.resizedImage_gammaMatrix_vector[22])/4;
+	R[0] = cFrame.resizedImage_gammaMatrix_vector[18]/(1+0.5*(tempSum+cFrame.resizedImage_gammaMatrix_vector[23]));
+	R[1] = tempSum/(1+cFrame.resizedImage_gammaMatrix_vector[23]);
+
+	tempSum = (cFrame.resizedImage_gammaMatrix_vector[13] + cFrame.resizedImage_gammaMatrix_vector[14] + cFrame.resizedImage_gammaMatrix_vector[15] + cFrame.resizedImage_gammaMatrix_vector[16])/4;
+	R[2] = cFrame.resizedImage_gammaMatrix_vector[12]/(1+0.5*(tempSum+cFrame.resizedImage_gammaMatrix_vector[17]));
+	R[3] = tempSum/(1+cFrame.resizedImage_gammaMatrix_vector[17]);
+
+	tempSum = (cFrame.resizedImage_gammaMatrix_vector[7] + cFrame.resizedImage_gammaMatrix_vector[8] + cFrame.resizedImage_gammaMatrix_vector[9] + cFrame.resizedImage_gammaMatrix_vector[10])/4;
+	R[4] = cFrame.resizedImage_gammaMatrix_vector[6]/(1+0.5*(tempSum+cFrame.resizedImage_gammaMatrix_vector[11]));
+	R[5] = tempSum/(1+cFrame.resizedImage_gammaMatrix_vector[11]);
+
+	tempSum = (cFrame.resizedImage_gammaMatrix_vector[1] + cFrame.resizedImage_gammaMatrix_vector[2] + cFrame.resizedImage_gammaMatrix_vector[3] + cFrame.resizedImage_gammaMatrix_vector[4])/4;
+	R[6] = cFrame.resizedImage_gammaMatrix_vector[0]/(1+0.5*(tempSum+cFrame.resizedImage_gammaMatrix_vector[4]));
+	R[7] = tempSum/(1+cFrame.resizedImage_gammaMatrix_vector[5]);
 
 	bigVectorOfFileNames.push_back(input_file);
 
-	for(int i=0; i < 10; i++)
-	{
-		vector<double> result;
-		bigVectorOfOtherResults.push_back(result);
-	}
+	vector<double> features_model;
+	features_model.push_back(cFrame.resizedImage_noise3_vector[0]);
+	features_model.push_back(cFrame.dynamicRange);
+	features_model.push_back(cFrame.exposure*cFrame.contrast);
+	features_model.push_back(cFrame.resizedImage_sharpness4);
+	features_model.push_back(cFrame.resizedImage_details);
+	features_model.insert(features_model.end(),cFrame.resizedImage_all_sharpness.begin(),cFrame.resizedImage_all_sharpness.end());
 
-	bigVectorOfOtherResults[0].push_back(cFrame.resolution);
-	bigVectorOfOtherResults[1].push_back(cFrame.resizedImage_noise2_vector[0]);
-	bigVectorOfOtherResults[2].push_back(cFrame.resizedImage_noise2_vector[1]);
-	bigVectorOfOtherResults[3].push_back(cFrame.colorWarmth);	
-	bigVectorOfOtherResults[4].push_back(cFrame.saturation);
-	bigVectorOfOtherResults[5].push_back(cFrame.blockiness);
-	bigVectorOfOtherResults[6].push_back(cFrame.percentageOverExposure);
-	bigVectorOfOtherResults[7].push_back(cFrame.percentageUnderExposure);
-	bigVectorOfOtherResults[8].push_back(cFrame.resizedImage_noise2_vector[2]);
-	bigVectorOfOtherResults[9].push_back(cFrame.resizedImage_noise3_vector[1]);
+	features_model.push_back(cFrame.colorWarmth);	
+	features_model.push_back(cFrame.saturation);	
+	features_model.push_back(cFrame.percentageOverExposure);	
+	features_model.push_back(cFrame.percentageUnderExposure);	
+	features_model.push_back(cFrame.resizedImage_noise3_vector[1]);	
+	features_model.insert(features_model.end(),cFrame.resizedImage_gammaMatrix_vector.begin(),cFrame.resizedImage_gammaMatrix_vector.end());
 
-	//total of 25 
-	for(int i = 0; i < cFrame.resizedImage_gammaMatrix_vector.size(); i++)
-	{
-		vector<double> result;
-		result.push_back(cFrame.resizedImage_gammaMatrix_vector[i]);
-		bigVectorOfOtherResults.push_back(result);
-	}
+	for(int i=0;i<cFrame.resizedImage_all_sharpness.size();i++)
+		features_model.push_back( cFrame.resizedImage_all_sharpness[i]/exp(cFrame.resizedImage_noise3_vector[0]));	
+	
+	features_model.push_back(cFrame.resizedImage_sharpness4/exp(cFrame.resizedImage_noise3_vector[0])); 
+
+	features_model.insert(features_model.end(), R, R+8);
+		
+	features_model.insert(features_model.end(),cFrame.NSS_features.begin(),cFrame.NSS_features.end());
+	bigVectorOfResults.push_back(features_model);
+	
+	vector<double> features_display;
+	features_display=features_model;
+	bigVectorOfOtherResults.push_back(features_display);
+
+
 }
 
 void VideoQuality::WriteToCSV(  vector<double> vectorMOS, 
@@ -1435,28 +1785,10 @@ void VideoQuality::WriteToCSV(  vector<double> vectorMOS,
 		vector<string> record;
 
 		record.push_back(bigVectorOfFileNames[i]);
-
-		if( modelVector.size() > 0)
-		{
-			record.push_back("SentToModel->");
-			for(int j = 0; j < modelVector.size(); j++)
-			{
-				tempStr = to_string(modelVector[j]);
-				record.push_back(tempStr);
-			}
-		}
-
-		record.push_back("SentToR->");
-		for(int j = 0; j < bigVectorOfResults.size(); j++)
-		{
-			tempStr = to_string(bigVectorOfResults[j][i]);
-			record.push_back(tempStr);
-		}
-
 		record.push_back("ForStudyOnly->");
-		for(int j = 0; j < bigVectorOfOtherResults.size(); j++)
+		for(int j = 0; j < bigVectorOfOtherResults[0].size(); j++)
 		{	
-			tempStr = to_string(bigVectorOfOtherResults[j][i]);
+			tempStr = to_string(bigVectorOfOtherResults[i][j]);
 			record.push_back(tempStr);
 		}
 
@@ -1571,7 +1903,7 @@ bool VideoQuality::PrintStringVectorToFile(string fileName, std::vector<string> 
 	tempOutfile1.open (fileName.c_str(),ios::app);
 	if(!tempOutfile1.is_open())
 	{
-		//cout<<"Can not open file. Please verify the path and filename!"<<endl;
+		cout<<"Can not open file. Please verify the path and filename!"<<endl;
 		return FALSE;
 	}
 
@@ -1760,7 +2092,7 @@ void VideoQuality::Contrast_HeatMap(std::string& video_file)
 
 }
 
-void VideoQuality::Sharpness_HeatMap(IplImage *frame)//std::string& fileName)
+void VideoQuality::Sharpness_HeatMap(IplImage *frame)
 {
 	Mat image(frame);
 	cv::Mat sharpness;
@@ -1925,13 +2257,12 @@ FrameData* VideoQuality::AnalyzePhoto(std::string& sourceFileName, std::string& 
 	FrameData *frameData = new FrameData();		
 	map<int,FrameData> frame_data_map;
 	float time_frame_val=0;
-	if (frame !=nullptr)								//if the frame is valid.
+	if (frame !=nullptr)								
 	{
 		setResolution(frame->width,frame->height);
 
 		if(frame)
 		{
-			//resize original to a smaller resolution;
 			int r_resized, c_resized;
 			getScaleToMonitor(frame->height, frame->width, r_resized, c_resized);
 			IplImage *frame_resized = cvCreateImage( cvSize(c_resized, r_resized), frame->depth, frame->nChannels);
@@ -1943,7 +2274,7 @@ FrameData* VideoQuality::AnalyzePhoto(std::string& sourceFileName, std::string& 
 			vector<double> sharpness_val5, resizedImage_sharpness_val5, noise2_vector, resizedImage_noise2_vector;
 			double percentageOverExposure = 0, percentageUnderExposure = 0;			
 			vector<vector<double>> totalvec; 
-
+			vector<double> NSS_feat;
 			double start_time1  = clock();
 						
 			vector<double> resizedImage_noise3_vector = VideoQuality::Calculate_Noise3(frame_resized);
@@ -1966,15 +2297,17 @@ FrameData* VideoQuality::AnalyzePhoto(std::string& sourceFileName, std::string& 
 				/*6*/ FeatureTask.run([frame_resized,&resizedImage_noise_val1,&resizedImage_avg_activity]{ 
 							VideoQuality::Calculate_Noise1(frame_resized,resizedImage_noise_val1,resizedImage_avg_activity);});
 				/*7*/ FeatureTask.run([frame_resized,&resizedImage_sharpness_val4, &resizedImage_sharpness_detail]{ 
-							VideoQuality::Calculate_Sharpness4(frame_resized,resizedImage_sharpness_val4, resizedImage_sharpness_detail, false);});	 // NEW-ALGO !!				 
+							VideoQuality::Calculate_Sharpness4(frame_resized,resizedImage_sharpness_val4, resizedImage_sharpness_detail, false);});	 				 
 				/*8*/ FeatureTask.run([frame_resized,&colorWarmth]{
 							VideoQuality::Calculate_ColorWarmth(frame_resized,colorWarmth);	});
 				/*9*/ FeatureTask.run([frame_resized,&percentageOverExposure, &percentageUnderExposure]{
 							Calculate_OverAndUnderExposure(frame_resized, percentageOverExposure, percentageUnderExposure, false);});
 				/*10*/ FeatureTask.run([frame_resized,&resizedImage_sharpness_val5]{ 
-							VideoQuality::Calculate_Sharpness5(frame_resized, resizedImage_sharpness_val5); });// returns 9 values															
+							VideoQuality::Calculate_Sharpness5(frame_resized, resizedImage_sharpness_val5); });															
 				/*11*/ FeatureTask.run([frame_resized,&resizedImage_noise2_vector, directory, mosModel]{ 
-							VideoQuality::Calculate_Noise2(frame_resized, resizedImage_noise2_vector, directory, mosModel); }); // returns 3 values
+							VideoQuality::Calculate_Noise2(frame_resized, resizedImage_noise2_vector, directory, mosModel); }); 
+				/*12*/ FeatureTask.run([frame_resized, &NSS_feat]{
+							VideoQuality::Compute_NSS(frame_resized,NSS_feat);});		
 						
 				
 
@@ -1993,9 +2326,9 @@ FrameData* VideoQuality::AnalyzePhoto(std::string& sourceFileName, std::string& 
 			/*7*/ resizedImage_sharpness_val4	= Calculate_Sharpness4(frame_resized, resizedImage_sharpness_detail, false);
 			/*8*/ colorWarmth					= Calculate_ColorWarmth(frame_resized);	
 			/*9*/ Calculate_OverAndUnderExposure(frame_resized, percentageOverExposure, percentageUnderExposure);
-
-				/*10*/ resizedImage_sharpness_val5		= Calculate_Sharpness5(frame_resized);							// returns 9 values
-				/*11*/ resizedImage_noise2_vector		= Calculate_Noise2    (frame_resized, directory, mosModel);		// returns 3 values
+			/*10*/ resizedImage_sharpness_val5		= Calculate_Sharpness5(frame_resized);							
+			/*11*/ resizedImage_noise2_vector		= Calculate_Noise2    (frame_resized, directory, mosModel);		
+			/*12*/ NSS_feat=Compute_NSS(frame_resized);
 
 				
 			}
@@ -2161,7 +2494,8 @@ FrameData* VideoQuality::AnalyzePhoto(std::string& sourceFileName, std::string& 
 									resizedImage_gammaMatrix_vector,
 									final_noise,
 									resizedImage_final_noise,
-									tempMultiScaleTextureAcutance);
+									tempMultiScaleTextureAcutance,
+									NSS_feat);
 			
 			WriteResultsToBigVectors(	*frameData, 
 										numOfAttributesInRVector, 
@@ -2169,7 +2503,6 @@ FrameData* VideoQuality::AnalyzePhoto(std::string& sourceFileName, std::string& 
 										bigVectorOfResults, 
 										bigVectorOfOtherResults, 
 										bigVectorOfFileNames);					
-
 			double mos = MOS(category, mosModel, bigVectorOfResults, bigVectorOfOtherResults, bigVectorOfFileNames, directory, onCloud);
 
 			
@@ -2196,10 +2529,10 @@ FrameData* VideoQuality::AnalyzePhoto(std::string& sourceFileName, std::string& 
 		frame_data_map.clear();
 		frame_data_map.clear();
 	}
-	//else
-	//{
-	//	cout<<"Input  file does not exist. Please verify."<<endl;
-	//}
+	else
+	{
+		cout<<"Input  file does not exist. Please verify."<<endl;
+	}
 	
 	return frameData;
 }
@@ -2215,7 +2548,6 @@ double VideoQuality::MOS(std::string& category,
 	
 	int uniqueNo = rand();
 
-	/*
 	string inputFile_string = directory + "\\" + std::to_string(uniqueNo) + "photoFeatures.txt";
 	const char* inputFile = inputFile_string.c_str();
 	string outputFile_string = directory + "\\" + std::to_string(uniqueNo) + "mos.txt";
@@ -2223,13 +2555,12 @@ double VideoQuality::MOS(std::string& category,
 
 	remove(inputFile);  // delete entries of last run !
 	remove(outputFile); // delete predictions of last run !
-	*/
 
-	int noOfAttributes = bigVectorOfResults.size();
-	int noOfEntries = bigVectorOfResults[0].size();
+	int noOfAttributes = bigVectorOfResults[0].size();
+	int noOfEntries = bigVectorOfResults.size();
 
 	//Check for missing values and replace with defaults
-	bool MISSINGVALUEFOUND = bigVectorOfResults[1][0] == -3.142 ? true : false;
+	bool MISSINGVALUEFOUND = bigVectorOfResults[0][1] == -3.142 ? true : false;
 
 	string scriptFile, train_file, model_file;
 	
@@ -2266,50 +2597,13 @@ double VideoQuality::MOS(std::string& category,
 		train_file = "MOSallTrainingData.txt";
 		model_file = "MOSModelData_forAll.txt";
 	}	
-
+	
 	vector<double> modelVector;
 	for(int j = 0; j < noOfAttributes; j++)
 	{
-		modelVector.push_back(std::log(1 + bigVectorOfResults[j][0]));		
+		modelVector.push_back(std::log(1 + bigVectorOfResults[0][j]));		
 	}
-
-	//bigVectorOfOtherResults indexes 3-4, 6-7, 9-end
-	modelVector.push_back(std::log(1+bigVectorOfOtherResults[3][0]));
-	modelVector.push_back(std::log(1+bigVectorOfOtherResults[4][0]));
-
-	modelVector.push_back(std::log(1+bigVectorOfOtherResults[6][0]));
-	modelVector.push_back(std::log(1+bigVectorOfOtherResults[7][0]));
-
-	for(int i=9;i<bigVectorOfOtherResults.size();i++)
-		modelVector.push_back(std::log(1+bigVectorOfOtherResults[i][0]));
-
-	for(int i=6;i<15;i++)
-		modelVector.push_back(std::log(1 + bigVectorOfResults[i][0]/exp(bigVectorOfResults[0][0])));		
-
-	//8 different new featuers R1-R8 calculated here and then pushed to modelVector
-	double R[8];
-
-	double tempSum = (bigVectorOfOtherResults[29][0] + bigVectorOfOtherResults[30][0] + bigVectorOfOtherResults[31][0] + bigVectorOfOtherResults[32][0])/4;
-	R[0] = bigVectorOfOtherResults[28][0]/(1+0.5*(tempSum+bigVectorOfOtherResults[33][0]));
-	R[1] = tempSum/(1+bigVectorOfOtherResults[33][0]);
-
-	tempSum = (bigVectorOfOtherResults[23][0] + bigVectorOfOtherResults[24][0] + bigVectorOfOtherResults[25][0] + bigVectorOfOtherResults[26][0])/4;
-	R[2] = bigVectorOfOtherResults[22][0]/(1+0.5*(tempSum+bigVectorOfOtherResults[27][0]));
-	R[3] = tempSum/(1+bigVectorOfOtherResults[27][0]);
-
-	tempSum = (bigVectorOfOtherResults[17][0] + bigVectorOfOtherResults[18][0] + bigVectorOfOtherResults[19][0] + bigVectorOfOtherResults[20][0])/4;
-	R[4] = bigVectorOfOtherResults[16][0]/(1+0.5*(tempSum+bigVectorOfOtherResults[21][0]));
-	R[5] = tempSum/(1+bigVectorOfOtherResults[21][0]);
-
-	tempSum = (bigVectorOfOtherResults[11][0] + bigVectorOfOtherResults[12][0] + bigVectorOfOtherResults[13][0] + bigVectorOfOtherResults[14][0])/4;
-	R[6] = bigVectorOfOtherResults[10][0]/(1+0.5*(tempSum+bigVectorOfOtherResults[14][0]));
-	R[7] = tempSum/(1+bigVectorOfOtherResults[15][0]);
-
-
-	for(int i=0;i<8;i++)
-		modelVector.push_back(log(1+R[i]));
-
-
+	
 	double mos = 0.0;
 
 	if(mosModel.compare(Constants::GenericMOS_LibSvm)== 0 || mosModel.compare(Constants::CategoryMOS_LibSvm)== 0) 
@@ -2355,6 +2649,7 @@ double VideoQuality::MOS(std::string& category,
 	
 	//Bound the MOS
 	double boundMOS = mos;
+
 	if(mos > 4.5) boundMOS = 4.5; // Hard Upper Bound on Individual Photos to 4.5
 	if(mos < 1.0) boundMOS = 1.0; // Hard Lower Bound on Individual Photos to 1.
 
@@ -2364,10 +2659,12 @@ double VideoQuality::MOS(std::string& category,
 	vector<double> boundedMOS;
 	boundedMOS.push_back(boundMOS);
 
+	
 	if(!onCloud)
 	{
 		WriteToCSV(individualMOS, boundedMOS, modelVector, bigVectorOfResults, bigVectorOfOtherResults, bigVectorOfFileNames);
 	}
-
+	
+	
 	return boundMOS;
 }  

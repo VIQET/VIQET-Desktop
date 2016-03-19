@@ -20,7 +20,6 @@ using namespace VQHelper;
 
 void MarshalTheVector(vector<double>& input,array<double>^% output)
 {
-	// Sharpness 9 values 
 	// get unmanaged values
 	vector<double> values;
 	for(int i=0;i<input.size();i++)
@@ -81,7 +80,8 @@ VisualizationImage^ CreateVisualizationImage(String^ visualizationName, String^ 
 
 int HelperClass::GetBackendVersion()
 {
-	return 115;
+    // Backend version
+	return 117;
 }
 
 Summary^ HelperClass::ValueSummary(List<double>^ values)
@@ -138,19 +138,12 @@ List<Summary^>^ HelperClass::ValueSummaryList(List<List<double>^>^ listOfvalues)
 PhotoResult^ HelperClass::AnalyzePhoto(String^ SourceFileName, String^ category, String^ mosModel, bool onCloud)
 {	
 	PhotoResult^ photoResult= nullptr;
-
-	//std::ofstream myfile; myfile.open ("C:\\VIQET\\debugging.txt",ios::app);
-	//myfile << "inside HelperClass::AnalyzePhoto" <<"\n"; myfile.close();
-
 	FrameData *frameData = umHelper->AnalyzePhoto(	ManagedToUnmanagedString(SourceFileName), 
 													ManagedToUnmanagedString(category), 
 													ManagedToUnmanagedString(mosModel), 
 													ManagedToUnmanagedString(this->directoryPathForFiles),
 													onCloud);
 	
-	//myfile.open ("C:\\VIQET\\debugging.txt",ios::app);
-	//myfile << "inside HelperClass::AnalyzePhoto (after calling AnalyzePhoto)" <<"\n"; myfile.close();
-
 	if(frameData != nullptr)
 	{
 		photoResult = gcnew PhotoResult();
@@ -176,7 +169,5 @@ PhotoResult^ HelperClass::AnalyzePhoto(String^ SourceFileName, String^ category,
 	}
 	delete frameData;
 
-	//myfile.open ("C:\\VIQET\\debugging.txt",ios::app);
-	//myfile << "inside HelperClass::AnalyzePhoto(before return)" <<"\n"; myfile.close();
 	return photoResult;
 }
