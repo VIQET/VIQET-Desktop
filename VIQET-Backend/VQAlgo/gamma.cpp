@@ -108,7 +108,7 @@ double Gamma
         {
             // Use identity gamma(z) = gamma(z+1)/z
             // The variable "result" now holds gamma of the original y + 1
-            // Thus we use y-1 to get back the orginal y.
+            // Thus we use y-1 to get back the original y.
             result /= (y-1.0);
         }
         else

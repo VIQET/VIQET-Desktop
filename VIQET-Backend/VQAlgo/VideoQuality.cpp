@@ -52,7 +52,7 @@ VideoQuality::VideoQuality()
 	first_write_to_file=TRUE;
 	blockCnt=0;
 	DayLight=FALSE;
-	srand(time(NULL)); // to make it truely random
+	srand(time(NULL)); // to make it truly random
 
 }
 
@@ -273,7 +273,7 @@ double VideoQuality::Calculate_ColorWarmth(IplImage *img)
 	cv::Mat xyzMat_double;
 	xyz_Mat.convertTo(xyzMat_double, CV_64F);	
 
-	//seperate out x,y,z channels
+	//separate out x,y,z channels
 	Mat img_x(xyz_Mat.rows, xyz_Mat.cols, CV_64F);
 	Mat img_y(xyz_Mat.rows, xyz_Mat.cols, CV_64F);
 	Mat img_z(xyz_Mat.rows, xyz_Mat.cols, CV_64F);
@@ -510,7 +510,7 @@ vector<double> VideoQuality::Calculate_NoiseInSnip(IplImage *snip, double imageR
 	cv::Mat hsv_snipMat_double;
 	hsv_snipMat.convertTo(hsv_snipMat_double, CV_64F);
 
-	//seperate out h,s,v channels
+	//separate out h,s,v channels
 	Mat snip_h(hsv_snipMat_double.rows, hsv_snipMat_double.cols, CV_64F);
 	Mat snip_s(hsv_snipMat_double.rows, hsv_snipMat_double.cols, CV_64F);
 	Mat snip_v(hsv_snipMat_double.rows, hsv_snipMat_double.cols, CV_64F);
@@ -520,7 +520,7 @@ vector<double> VideoQuality::Calculate_NoiseInSnip(IplImage *snip, double imageR
 
 	snip_h = snip_h.mul((double)(1/180.0)); 				
 
-	//seperate out r,g,b channels
+	//separate out r,g,b channels
 	Mat snip_r(snip_Mat_double.rows, snip_Mat_double.cols, CV_64F);
 	Mat snip_g(snip_Mat_double.rows, snip_Mat_double.cols, CV_64F);
 	Mat snip_b(snip_Mat_double.rows, snip_Mat_double.cols, CV_64F);
